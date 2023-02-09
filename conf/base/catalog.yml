@@ -24,6 +24,10 @@ zh23:
   type: pandas.CSVDataSet
   filepath: https://data.stadt-zuerich.ch/dataset/ewz_bruttolastgang_stadt_zuerich/download/2023_ewz_bruttolastgang.csv
 
+zh_raw:
+  type: pickle.PickleDataSet
+  filepath: data/01_raw/zh_raw.pickle
+
 # Basel data file
 bs:
   type: pandas.CSVDataSet
@@ -45,3 +49,7 @@ wi19:
 wi22:
   type: pandas.CSVDataSet
   filepath: https://www.web.statistik.zh.ch/ogd/daten/ressourcen/KTZH_00001863_00003562.csv
+
+wi_raw:
+  type: pickle.PickleDataSet
+  filepath: data/01_raw/wi_raw.pickle
