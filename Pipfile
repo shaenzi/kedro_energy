@@ -7,6 +7,8 @@ name = "pypi"
 pandas = "*"
 kedro = "*"
 ipython = "*"
+requests = "*"
+aiohttp = "*"
 
 [dev-packages]
 

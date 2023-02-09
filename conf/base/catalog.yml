@@ -3,6 +3,7 @@
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://kedro.readthedocs.io/en/stable/data/data_catalog.html
 
+# Zurich data files
 zh19:
   type: pandas.CSVDataSet
   filepath: https://data.stadt-zuerich.ch/dataset/ewz_bruttolastgang_stadt_zuerich/download/2019_ewz_bruttolastgang.csv
@@ -22,3 +23,25 @@ zh22:
 zh23:
   type: pandas.CSVDataSet
   filepath: https://data.stadt-zuerich.ch/dataset/ewz_bruttolastgang_stadt_zuerich/download/2023_ewz_bruttolastgang.csv
+
+# Basel data file
+bs:
+  type: pandas.CSVDataSet
+  filepath: https://data.bs.ch/api/v2/catalog/datasets/100233/exports/csv
+
+# Winterthur data files
+wi13:
+  type: pandas.CSVDataSet
+  filepath: https://www.web.statistik.zh.ch/ogd/daten/ressourcen/KTZH_00001863_00003561.csv
+
+wi16:
+  type: pandas.CSVDataSet
+  filepath: https://www.web.statistik.zh.ch/ogd/daten/ressourcen/KTZH_00001863_00003563.csv
+
+wi19:
+  type: pandas.CSVDataSet
+  filepath: https://www.web.statistik.zh.ch/ogd/daten/ressourcen/KTZH_00001863_00003564.csv
+
+wi22:
+  type: pandas.CSVDataSet
+  filepath: https://www.web.statistik.zh.ch/ogd/daten/ressourcen/KTZH_00001863_00003562.csv
