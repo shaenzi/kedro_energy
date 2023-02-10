@@ -5,7 +5,7 @@ generated using Kedro 0.18.4
 
 from kedro.pipeline import Pipeline, node, pipeline
 
-from .nodes import combine_wi, combine_zh
+from .nodes import combine_wi, combine_zh, deal_with_ts, read_bs
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -22,6 +22,18 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=["zh19", "zh20", "zh21", "zh22", "zh23"],
                 outputs="zh_raw",
                 name="combine_zh_node",
+            ),
+            node(
+                func=read_bs,
+                inputs="bs_csv",
+                outputs="bs_raw",
+                name="read_bs_node",
+            ),
+            node(
+                func=deal_with_ts,
+                inputs=["wi_raw", "zh_raw", "bs_raw"],
+                outputs=["wi", "zh", "bs"],
+                name="deal_with_ts_node",
             ),
         ]
     )

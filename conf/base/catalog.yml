@@ -28,10 +28,24 @@ zh_raw:
   type: pickle.PickleDataSet
   filepath: data/01_raw/zh_raw.pickle
 
+zh:
+  type: pickle.PickleDataSet
+  filepath: data/01_raw/zh.pickle
+
 # Basel data file
-bs:
+bs_csv:
   type: pandas.CSVDataSet
   filepath: https://data.bs.ch/api/v2/catalog/datasets/100233/exports/csv
+  load_args:
+    sep: ";"
+
+bs_raw:
+  type: pickle.PickleDataSet
+  filepath: data/01_raw/bs_raw.pickle
+
+bs:
+  type: pickle.PickleDataSet
+  filepath: data/01_raw/bs.pickle
 
 # Winterthur data files
 wi13:
@@ -53,3 +67,7 @@ wi22:
 wi_raw:
   type: pickle.PickleDataSet
   filepath: data/01_raw/wi_raw.pickle
+
+wi:
+  type: pickle.PickleDataSet
+  filepath: data/01_raw/wi.pickle
