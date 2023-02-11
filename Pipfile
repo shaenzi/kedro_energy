@@ -9,6 +9,13 @@ kedro = "*"
 ipython = "*"
 requests = "*"
 aiohttp = "*"
+ipykernel = "*"
+numpy = "*"
+matplotlib = "*"
+seaborn = "*"
+nbformat = "*"
+nbclient = "*"
+notebook = "*"
 
 [dev-packages]
 
