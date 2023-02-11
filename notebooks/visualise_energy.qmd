@@ -47,14 +47,16 @@ df["gross_energy_mwh"] = df["gross_energy_kwh"] / 1000
 
 grouped = df.groupby(["year", "yday"]).sum("gross_energy_kwh").reset_index()
 
-grouped["rolling_avg"] = grouped["gross_energy_kwh"].rolling(window=7).mean()
+grouped["rolling_avg_gwh"] = grouped["gross_energy_kwh"].rolling(window=7).mean()/1000000
 ```
 
 ```{python}
-sns.lineplot(data=grouped, x="yday", y="rolling_avg", hue="year")
+ax = sns.lineplot(data=grouped, x="yday", y="rolling_avg_gwh", hue="year")
+ax.set_xlabel("Day of the year")
+ax.set_ylabel("Daily energy consumption [GWh]")
 ```
 
-# Visualise the entire variability with a heatmap-like plot
+# Visualise an entire year without aggregation in one plot
 
 ```{python}
 df22 = df[df.year == 2022]

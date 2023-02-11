@@ -60,20 +60,20 @@ def _deal_with_time_utc(df: pd.DataFrame) -> pd.DataFrame:
     df["timestamp"] = pd.to_datetime(
         df["timestamp"], utc=True, format="%Y-%m-%d %H:%M:%S%z"
     )
-    # df["timestamp"] = df["timestamp"].tz_convert("dateutil/Europe/Busingen")
 
     return df
 
 
 def _deal_with_time_local(df: pd.DataFrame) -> pd.DataFrame:
+    """local time, no time zone indication"""
 
     df["timestamp"] = pd.to_datetime(df["timestamp"], format="%Y-%m-%d %H:%M:%S")
-    # df["timestamp"] = df["timestamp"].tz_localize("dateutil/Europe/Zurich")
 
     return df
 
 
 def deal_with_ts(wi_raw: pd.DataFrame, zh_raw: pd.DataFrame, bs_raw: pd.DataFrame):
+    """function that converts the time from string to timestamp for all dataframes"""
     wi = _deal_with_time_utc(wi_raw)
     bs = _deal_with_time_utc(bs_raw)
     zh = _deal_with_time_local(zh_raw)
@@ -82,6 +82,10 @@ def deal_with_ts(wi_raw: pd.DataFrame, zh_raw: pd.DataFrame, bs_raw: pd.DataFram
 
 
 def render_notebooks(wi: pd.DataFrame, zh: pd.DataFrame, bs: pd.DataFrame):
+    """
+    function to render the visualisation notebook, passing the appropriate df as a parameter
+
+    taking the input parameters as dummy parameters, as they are required, but not directly passed on here"""
 
     # render markdown with zurich data
     os.system(
