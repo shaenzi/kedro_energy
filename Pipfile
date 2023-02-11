@@ -16,6 +16,8 @@ seaborn = "*"
 nbformat = "*"
 nbclient = "*"
 notebook = "*"
+jupyter = "*"
+plotnine = "*"
 
 [dev-packages]
 

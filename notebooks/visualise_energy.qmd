@@ -2,24 +2,81 @@
 title: "Visualising energy usage of Swiss cities"
 format:
   html:
-    code-fold: true
+    code-fold: false
 jupyter: python3
 ---
 
+# Getting ready
+
+Loading required packages
+
 ```{python}
-#| label: fig-polar
-#| fig-cap: "A line plot on a polar axis"
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(
-  subplot_kw = {'projection': 'polar'} 
-)
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
+import pandas as pd
+import seaborn as sns
 ```
+
+Defining a parameter
+
+This can be used when rendering to pass a different name, in which case a different city's data will be visualised.
+```{python}
+#| tags: [parameters]
+df_name = "wi"
+```
+
+Loading the kedro vairables, including the data `catalog`
+```{python}
+#| output: false
+%load_ext kedro.ipython
+```
+
+Load the data
+```{python}
+df = catalog.load(df_name)
+df.head()
+```
+
+# Daily energy use over the years
+```{python}
+df['year'] = df['timestamp'].dt.year
+df['yday'] = df['timestamp'].dt.day_of_year
+df["time_of_day"] = df["timestamp"].dt.time
+df["date"] = df["timestamp"].dt.date
+df["gross_energy_mwh"] = df["gross_energy_kwh"] / 1000
+
+grouped = df.groupby(["year", "yday"]).sum("gross_energy_kwh").reset_index()
+
+grouped["rolling_avg"] = grouped["gross_energy_kwh"].rolling(window=7).mean()
+```
+
+```{python}
+
+sns.lineplot(data=grouped, x="yday", y="rolling_avg", hue="year")
+```
+
+# Visualise the entire variability with a heatmap-like plot
+
+```{python}
+df22 = df[df.year == 2022]
+```
+
+
+
+```{python}
+from plotnine import ggplot, aes, geom_tile, labs, scale_x_discrete, scale_y_discrete
+from mizani.breaks import date_breaks
+from mizani.formatters import date_format
+import datetime
+```
+
+
+```{python}
+(ggplot(df22, aes(x="time_of_day", y="date", fill="gross_energy_mwh"))
+ + geom_tile()
+ + scale_y_discrete(breaks=[datetime.date(2022, 1,1), datetime.date(2022,4,1), datetime.date(2022,7,1), datetime.date(2022,10,1)], labels=["Jan", "Apr", "July", "Oct"], limits=df22.date.unique()[::-1])
+  + scale_x_discrete(breaks=[datetime.time(0,0), datetime.time(6,0), datetime.time(12,0), datetime.time(18,0)],
+  labels=["00:00", "06:00", "12:00", "18:00"])
+ + labs(x = "Time of day", y = "", fill = "energy used per 15min [MWh]")
+ )
+```
+
+scales give a strange error (repr-error 0)
