@@ -4,6 +4,7 @@ generated using Kedro 0.18.4
 """
 
 import pandas as pd
+import os
 
 
 def combine_wi(
@@ -78,3 +79,21 @@ def deal_with_ts(wi_raw: pd.DataFrame, zh_raw: pd.DataFrame, bs_raw: pd.DataFram
     zh = _deal_with_time_local(zh_raw)
 
     return (wi, bs, zh)
+
+
+def render_notebooks(wi: pd.DataFrame, zh: pd.DataFrame, bs: pd.DataFrame):
+
+    # render markdown with zurich data
+    os.system(
+        "quarto render notebooks/visualise_energy.qmd -o notebooks/visualise_energy_zh.md -P df_name:zh"
+    )
+
+    # render markdown with winti data
+    os.system(
+        "quarto render notebooks/visualise_energy.qmd -o notebooks/visualise_energy_wi.md -P df_name:wi"
+    )
+
+    # render markdown with basel data
+    os.system(
+        "quarto render notebooks/visualise_energy.qmd -o notebooks/visualise_energy_bs.md -P df_name:bs"
+    )

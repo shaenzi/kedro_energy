@@ -18,6 +18,7 @@ nbclient = "*"
 notebook = "*"
 jupyter = "*"
 plotnine = "*"
+papermill = "*"
 
 [dev-packages]
 

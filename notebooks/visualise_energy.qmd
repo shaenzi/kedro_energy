@@ -1,8 +1,6 @@
 ---
 title: "Visualising energy usage of Swiss cities"
-format:
-  html:
-    code-fold: false
+format: gfm
 jupyter: python3
 ---
 
@@ -75,7 +73,7 @@ import datetime
  + scale_y_discrete(breaks=[datetime.date(2022, 1,1), datetime.date(2022,4,1), datetime.date(2022,7,1), datetime.date(2022,10,1)], labels=["Jan", "Apr", "July", "Oct"], limits=df22.date.unique()[::-1])
   + scale_x_discrete(breaks=[datetime.time(0,0), datetime.time(6,0), datetime.time(12,0), datetime.time(18,0)],
   labels=["00:00", "06:00", "12:00", "18:00"])
- + labs(x = "Time of day", y = "", fill = "energy used per 15min [MWh]")
+ + labs(x = "Time of day", y = "", fill = "energy used per 15min [MWh]", title= "2022")
  )
 ```
 
