@@ -85,15 +85,15 @@ def render_notebooks(wi: pd.DataFrame, zh: pd.DataFrame, bs: pd.DataFrame):
 
     # render markdown with zurich data
     os.system(
-        "quarto render notebooks/visualise_energy.qmd -o notebooks/visualise_energy_zh.md -P df_name:zh"
+        "quarto render notebooks/visualise_energy.qmd -o notebooks/visualise_energy_zh.html -P df_name:zh"
     )
 
     # render markdown with winti data
     os.system(
-        "quarto render notebooks/visualise_energy.qmd -o notebooks/visualise_energy_wi.md -P df_name:wi"
+        "quarto render notebooks/visualise_energy.qmd -o notebooks/visualise_energy_wi.html -P df_name:wi"
     )
 
     # render markdown with basel data
     os.system(
-        "quarto render notebooks/visualise_energy.qmd -o notebooks/visualise_energy_bs.md -P df_name:bs"
+        "quarto render notebooks/visualise_energy.qmd -o notebooks/visualise_energy_bs.html -P df_name:bs"
     )
